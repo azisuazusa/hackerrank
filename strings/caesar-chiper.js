@@ -25,27 +25,35 @@ function main() {
     var s = readLine();
     var k = parseInt(readLine());
 
-    var matches = s.match(/[a-zA-Z-]+/g);
-    var string = matches[0];
     var resultCode = [];
     var resultString = '';
-    for(var i = 0; i < string.length; i++) {
-        if(string.charAt(i) !== '-') {
-            if(string.charCodeAt(i) + k > 90 && string.charCodeAt(i) < 97) {
-                resultCode.push(string.charCodeAt(i) + k - 90 + 64);
+    k = k % 26;
+    for(var i = 0; i < s.length; i++) {
+        if(s.charAt(i).match(/[a-zA-Z]/) !== null) {
+
+            var charCode = s.charCodeAt(i) + k;
+            if(s.charCodeAt(i) < 91) {
+                if(charCode > 90) {
+                    charCode = charCode - 90 + 64;
+                    resultCode.push(charCode);
+                } else {
+                    resultCode.push(charCode);
+                }
             }
-            else if((string.charCodeAt(i) + k) > 122){
-                resultCode.push(string.charCodeAt(i) + k - 122 + 96);
-            } else {
-                resultCode.push(string.charCodeAt(i) + k);
+            else if(s.charCodeAt(i) > 96 && s.charCodeAt(i) < 123){
+                if(charCode > 122) {
+                    charCode = charCode - 122 + 96;
+                    resultCode.push(charCode);
+                } else {
+                    resultCode.push(charCode);
+                }
             }
         } else {
-            resultCode.push(string.charCodeAt(i));
+            resultCode.push(s.charCodeAt(i));
         }
     }
     for(var j = 0; j < resultCode.length; j++) {
         resultString += String.fromCharCode(resultCode[j]);
     }
     console.log(resultString);
-
 }
