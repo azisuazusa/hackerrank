@@ -32,7 +32,7 @@ fun ransomNote(magazine: String, ransom: String) : String {
     while (iterator.hasNext()) {
         val pair: Map.Entry<String, Int> = iterator.next()
         val word = pair.key
-        val count: Int = pair.value
+        val count = pair.value
         if (!magazineMap.containsKey(word)) {
             return "No"
         } else {
