@@ -28,7 +28,7 @@ class Node {
 
     fun add(string: String, index: Int) {
         size++
-        if (index == string.length) return;
+        if (index == string.length) return
         val current: Char = string[index]
         var child: Node? = getNode(current)
         if (child == null) {
