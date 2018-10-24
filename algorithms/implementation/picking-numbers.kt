@@ -25,8 +25,18 @@ import kotlin.text.*
  */
 
 fun pickingNumbers(a: Array<Int>): Int {
-    // Write your code here
-
+    var result = 0
+    for (i in 0..a.size) {
+        for (j in 1..a.size) {
+            if (abs(a[i] - a[j]) < 2) {
+                if (result == 0) result++
+                if (a[j] - a[j + 1] < 2) result++
+            } else {
+                result--
+            }
+        }
+    }
+    return result
 }
 
 fun main(args: Array<String>) {
