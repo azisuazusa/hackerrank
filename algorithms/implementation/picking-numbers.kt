@@ -1,22 +1,3 @@
-import java.io.*
-import java.math.*
-import java.security.*
-import java.text.*
-import java.util.*
-import java.util.concurrent.*
-import java.util.function.*
-import java.util.regex.*
-import java.util.stream.*
-import kotlin.collections.*
-import kotlin.comparisons.*
-import kotlin.io.*
-import kotlin.jvm.*
-import kotlin.jvm.functions.*
-import kotlin.jvm.internal.*
-import kotlin.ranges.*
-import kotlin.sequences.*
-import kotlin.text.*
-
 /*
  * Complete the 'pickingNumbers' function below.
  *
@@ -24,27 +5,22 @@ import kotlin.text.*
  * The function accepts INTEGER_ARRAY a as parameter.
  */
 
-fun pickingNumbers(a: Array<Int>): Int {
-    var result = 0
-    for (i in 0..a.size) {
-        for (j in 1..a.size) {
-            if (abs(a[i] - a[j]) < 2) {
-                if (result == 0) result++
-                if (a[j] - a[j + 1] < 2) result++
-            } else {
-                result--
-            }
-        }
+fun pickingNumbers(a: Array<Int>, n: Int): Int {
+    a.sort()
+    var count = 0
+    var max = 0
+    for (i in 0 until n) {
+        for (j in i until n) if (a[j] - a[i] <= 1) count++
+        if (count > max) max = count
+        count = 0
     }
-    return result
+    return max
 }
 
 fun main(args: Array<String>) {
     val n = readLine()!!.trim().toInt()
-
-    val a = readLine()!!.trimEnd().split(" ").map{ it.toInt() }.toTypedArray()
-
-    val result = pickingNumbers(a)
-
+    val a = readLine()!!.trimEnd().split(" ").map { it.toInt() }.toTypedArray()
+    val result = pickingNumbers(a, n)
     println(result)
 }
+
